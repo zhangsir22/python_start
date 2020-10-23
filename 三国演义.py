@@ -14,9 +14,8 @@ for li in li_list:
     detail_url = url2+li.a['href']
     print(detail_url)
     detail_page_text = requests.get(url=detail_url,headers=ua).text
-    detail_soup= BeautifulSoup(detail_page_text,'lxml')
+    detail_soup= BeautifulSoup(detail_page_text,'html.parser')
     div_tag = detail_soup.find('div',class_="chapter_content")
-    content = div_tag.text
     print(div_tag)
-    fp.write(title+':'+content+'\n')
-    print(title,'爬取成功')
+    # fp.write(title+':'+content+'\n')
+    # print(title,'爬取成功')
