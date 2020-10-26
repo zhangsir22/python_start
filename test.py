@@ -1,12 +1,12 @@
 import requests
 from lxml import etree
-url ='http://www.xbiquge.la/0/885/742710.html'
+url ='http://downsc.chinaz.net/Files/DownLoad/jianli/202010/jianli13852.rar'
 ua = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36 Edg/86.0.622.38"}
 
 
-txt = requests.get(url=url,headers=ua).text
+txt = requests.get(url=url,headers=ua).content
+with open('./jianli.rar','wb') as fp :
+    fp.write(txt)
 
-tree = etree.HTML(txt)
-text = tree.xpath('//div[@id="content"]')
-print(text[0].xpath('string(.)').encode('gbk'))
+
 
