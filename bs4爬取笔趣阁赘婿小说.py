@@ -1,4 +1,4 @@
-import lxml
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -11,14 +11,18 @@ soup = BeautifulSoup(respone,'lxml')
 title_list = soup.select('.box_con > div > dl > dd  ')
 # print(type(title_list))
 # print(title_list.dd.a['href'])
+#fp = open('./xx.txt','w',encoding='utf-8')
 for i in title_list:
     title = i.string
     text_url = i.a['href']
     text_url = sy_url+text_url
     print(text_url)
-    respone2 = requests.get(url=text_url)
+    respone2 = requests.get(url=text_url,headers=ua)
     txt = bytes(respone2.text,respone2.encoding).decode('utf-8','ignore')
     soup2 = BeautifulSoup(txt,'lxml')
-    text = soup2.select('.wrapper > div > div')
+    #print(soup2)
+    text = soup2.select('.box_con > div')
     print(text)
+    #fp.write(title + '\n' + text +'\n')
+
 
