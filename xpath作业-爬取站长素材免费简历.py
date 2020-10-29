@@ -23,7 +23,7 @@ for jianli in jianli_list:
         with open('./'+jianli_name+'.rar' ,'wb') as fp :
             fp.write(jianli3)
             print(jianli_name+"下载完成！")
-            ###
+
 
 
 
