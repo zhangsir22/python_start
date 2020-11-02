@@ -2,6 +2,7 @@ import requests
 from lxml import etree
 import os
 import time
+from multiprocessing.dummy import Pool
 url = "http://pic.netbian.com/"
 sy_url = "http://pic.netbian.com/4kmeinv/"
 ua =  {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.80 Safari/537.36 Edg/86.0.622.48'}
@@ -26,6 +27,7 @@ def tp(sy_url):
             fp.write(zp)
         print(ztp_name + "爬取成功" )
 def ran():
+    url_list = []
     url = "http://pic.netbian.com/4kmeinv/"
     url_page = requests.get(url=url,headers=ua).text
     r_tree = etree.HTML(url_page)
@@ -37,8 +39,13 @@ def ran():
         else:
             y = "index_" + str(i) + ".html"
         ys_url =url + y
-        tp(ys_url)
+        url_list.append(ys_url)
+    return url_list
+l = ran()
 start_time = time.time()
-ran()
-end_tiem = time.time()
-print("耗时：%d",end_tiem-start_time)
+pool = Pool(20)
+pool.map(tp,l)
+end_time =time.time()
+print("耗时%d:",tart_time-end_time)
+pool.close
+pool.join
