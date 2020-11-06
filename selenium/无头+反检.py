@@ -15,7 +15,7 @@ option = ChromeOptions()
 option.add_experimental_option('excludeSwitches', ['enable-automation'])
 
 #如何实现让selenium规避被检测到的风险
-bro = webdriver.Edge(executable_path='./msedgedriver.exe',)
+bro = webdriver.Chrome(executable_path='./chromedriver.exe',options=option,chrome_options=chrome_options)
 
 #无可视化界面（无头浏览器） phantomJs
 bro.get('https://www.baidu.com')
